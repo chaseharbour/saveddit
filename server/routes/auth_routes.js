@@ -87,7 +87,7 @@ router.get('/reddit', (req, res) => {
     //If user chooses "Allow" then they are redirected to redirectUri
     let authenticationUrl = snoowrap.getAuthUrl({
       clientId: CLIENT_ID,
-      scope: ['identity', 'submit', 'read', 'vote', 'mysubreddits'],
+      scope: ['identity', 'submit', 'read', 'vote', 'mysubreddits', 'history'],
       permanent: true,
       redirectUri: 'http://localhost:8081/auth/reddit/callback',
       state: 'teststring'
