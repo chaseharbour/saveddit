@@ -13,14 +13,24 @@ const {
   REDDIT_PASSWORD
 } = process.env;
 
+const authCheck = (req, res, next) => {
+  if (!req.session.userName) {
+    res.status(401).json({
+      authenticated: false,
+      message: "User has not been authenticated."
+    });
+  } else {
+    next();
+  }
+}
 
 
-router.get('/', (req, res) => {
+router.get('/:getFrom', authCheck, (req, res) => {
   
   if (req.session.userName) {
     const { refresh, token } = req.session; 
-    //console.log(`Refresh: ${refresh} and Access Token: ${token}.`);
-   
+    const { getFrom } = req.params;
+
     const r = new snoowrap({
       userAgent: 'scheddit',
       accessToken: token,
@@ -40,7 +50,12 @@ router.get('/', (req, res) => {
     async function getSavedPosts() {
       try{
         let urls;
-        const savedContent = await r.getMe().getSavedContent({ t: "all", limit: 5, type: "links" });
+        let queryOptions = { t: "all", limit: 5, type: "links" };
+
+        if (getFrom !== 1) {
+          queryOptions = { t: "all", limit: 5, type: "links", after: `${getFrom}` };
+        }
+        let savedContent = await r.getMe().getSavedContent(queryOptions);
 
         urls = savedContent.map(item => {
             if (!item.is_self && item.url && !item.is_video) {

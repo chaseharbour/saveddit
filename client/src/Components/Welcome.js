@@ -49,7 +49,6 @@ const Welcome = (props) => {
                 <div>
                     <h1>You have logged in successfully!</h1>
                     <h2>Welcome {user}</h2>
-                    <Post />
                 </div>
             )}
         </div>
