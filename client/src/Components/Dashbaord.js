@@ -25,7 +25,7 @@ const Dashboard = () => {
         .then(responseJson => {
             if (nextPageQuery !== 1) {
                 //Just creates more nested arrays of objects
-                setUSerSavedPosts(prevItems => [...responseJson, prevItems]);
+                setUSerSavedPosts(prevItems => [...prevItems, ...responseJson]);
             } else {
                 setUSerSavedPosts(responseJson);
             }
