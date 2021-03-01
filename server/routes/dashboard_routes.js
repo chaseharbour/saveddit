@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
     async function getSavedPosts() {
       try{
         let urls;
-        const savedContent = await r.getMe().getSavedContent({ t: "all", limit: 30, type: "links" });
+        const savedContent = await r.getMe().getSavedContent({ t: "all", limit: 5, type: "links" });
 
         urls = savedContent.map(item => {
             if (!item.is_self && item.url && !item.is_video) {

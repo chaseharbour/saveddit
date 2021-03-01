@@ -15,7 +15,7 @@ const Navigation = ({ authenticated, setAuthenticated }) => {
     }
 
     const handleGetSubsClick = () => {
-        window.open("http://localhost:8081/dashboard/", "_self")
+        window.open("http://localhost:3000/dashboard/", "_self")
     }
     
     return (

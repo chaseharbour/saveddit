@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Dashboard = () => {
 
-    const [userSubreddits, setUserSubreddits] = useState(null);
+    const [userSubreddits, setUserSubreddits] = useState([]);
 
     useEffect(() => {
          
@@ -21,7 +21,9 @@ const Dashboard = () => {
             throw new Error("Failed to retrieve subreddits");
         })
         .then(responseJson => {
-            setUserSubreddits(responseJson.subs);
+            console.log(responseJson);
+            setUserSubreddits(responseJson);
+            console.log(userSubreddits);
         })
         .catch(error => {
             console.error(error);
@@ -31,7 +33,16 @@ const Dashboard = () => {
     return (
         <div>
             <h1>Dashboard</h1>
-            {userSubreddits ?  userSubreddits.map(i => <p>{i}</p>) : <p>No subreddits found.</p>}
+            {userSubreddits ?  userSubreddits.map(i => {
+                return (
+                    <ul>
+                        <li key={i.postFullname}>
+                            <img src={i.imgMed}></img>
+                        </li>
+                    </ul>
+                )
+            }) : <p>No subreddits found.</p>}
+            {userSubreddits ? <button>Load More</button> : null}
         </div>
     )
 }
