@@ -88,6 +88,7 @@ router.get('/reddit', (req, res) => {
     let authenticationUrl = snoowrap.getAuthUrl({
       clientId: CLIENT_ID,
       scope: ['identity', 'submit', 'read', 'vote', 'mysubreddits', 'history'],
+      //Change to false. Will last an hour.
       permanent: true,
       redirectUri: 'http://localhost:8081/auth/reddit/callback',
       state: 'teststring'

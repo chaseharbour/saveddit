@@ -26,18 +26,17 @@ const authCheck = (req, res, next) => {
 
 
 router.get('/:getFrom', authCheck, (req, res) => {
+
+  console.log(req.session);
   
   if (req.session.userName) {
-    const { refresh, token } = req.session; 
+    const { token } = req.session; 
     const { getFrom } = req.params;
 
     const r = new snoowrap({
       userAgent: 'scheddit',
       accessToken: token,
     })
-
-    const redditUserInfo = r.getMe();
-    const redditSubs = r.getSubscriptions();
 
     //Gets urls from saved posts
     //TODO:
@@ -46,73 +45,46 @@ router.get('/:getFrom', authCheck, (req, res) => {
     //Get post title
     //How to handle albums???
 
-    //Pagination: "after" option in getSavedContent method. use item.name
+    //Query and pagination working! Maybe a more elegant way to get subsequent data.
     async function getSavedPosts() {
       try{
         let urls;
-        let queryOptions = { t: "all", limit: 5, type: "links" };
+        let urlsCleaned;
+        let queryOptions = { t: "all", limit: 10, type: "links" };
 
         if (getFrom !== 1) {
-          queryOptions = { t: "all", limit: 5, type: "links", after: `${getFrom}` };
+          queryOptions = { t: "all", limit: 10, type: "links", after: `${getFrom}` };
         }
         let savedContent = await r.getMe().getSavedContent(queryOptions);
 
         urls = savedContent.map(item => {
-            if (!item.is_self && item.url && !item.is_video) {
+            //If post doesn't fit criteria then it's sent as 'undefined'
+            if (!item.is_self && item.url && !item.is_video && item.preview && item.post_hint === "image") {
               return {
                 title: item.title,
+                postHint: item.post_hint,
+                domain: item.domain,
+                mediaEmbed: item.media_embed,
                 postFullname: item.name,
                 isLink: !item.is_self, 
+                isVideo: item.is_video,
                 nsfw: item.over_18, 
                 imgFull: item.url, 
                 imgSmall: item.preview ? item.preview.images[0].resolutions[0].url : null, 
-                imgMed: item.preview ? item.preview.images[0].resolutions[2].url : null,
+                imgMed: item.preview ? item.preview.images[0].resolutions[1].url : null,
               }
             }
           })
-        
-        res.send(urls);
+          urlsCleaned = urls.filter(Boolean);
+          res.json(urlsCleaned);
       }
       catch(error) {
+        console.error(error);
         res.status(500).send({error});
       }
     }
 
-    const sendData = async (dataRequest) => {
-      try {
-       return await dataRequest;
-      } catch (err) {
-        //console.error(err);
-        return res.send({err});
-      }
-    } 
-
-    //Get saved content from Reddit account
-    // sendData(redditSubs)
-    // .then(data => {
-    //   res.json({data})
-    // })
-    // .catch(err => console.error(err));
     getSavedPosts();
-
-
-    //Get subscribed subreddit names
-    // sendData(redditSubs)
-    // .then(data => {
-    //   const subscribed = [];
-    //   data.forEach(sub => {
-    //     const subName = sub.display_name;
-    //     subscribed.push(subName);
-    //   })
-    //   res.json({
-    //     success: true,
-    //     message: "Successfully retrieved subscribed subreddits",
-    //     subs: subscribed
-    //   });
-    // })
-    // .catch(err => console.error(err));
-
-
   }
 
 })

@@ -57,9 +57,9 @@ const Dashboard = () => {
             />
             <h1>Dashboard</h1>
             {userSavedPosts ?  userSavedPosts.map(i => {
-                return (
+               return (
                     <ul>
-                        <li key={i.postFullname}>
+                        <li key={i.title}>
                             <img src={i.imgMed}></img>
                         </li>
                     </ul>
