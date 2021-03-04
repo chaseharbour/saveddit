@@ -13,10 +13,6 @@ const Navigation = ({ authenticated, setAuthenticated }) => {
     const handleLoginClick = () => {
         window.open("http://localhost:8081/auth/reddit", "_self")
     }
-
-    const handleGetSubsClick = () => {
-        window.open("http://localhost:3000/dashboard/", "_self")
-    }
     
     return (
         <ul>
@@ -26,7 +22,6 @@ const Navigation = ({ authenticated, setAuthenticated }) => {
             {authenticated ? (
                 <>
                     <li onClick={handleLogoutClick}>Logout</li>
-                    <li onClick={handleGetSubsClick}>Dashboard</li>
                 </>
             ) : (
                 <li onClick={handleLoginClick}>Login</li>

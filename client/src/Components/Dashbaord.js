@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Navigation from './Navigation';
 
 const Dashboard = () => {
 
     const [userSavedPosts, setUSerSavedPosts] = useState([]);
-    const [authenticated, setAuthenticated] = useState(false);
     const [nextPageQuery, setNextPageQuery] = useState(1);
 
     const getSavedQuery = () => {
@@ -29,11 +27,9 @@ const Dashboard = () => {
             } else {
                 setUSerSavedPosts(responseJson);
             }
-            setAuthenticated(true);
 
         })
         .catch(error => {
-            setAuthenticated(false);
             console.error(error);
         })
     }
@@ -50,11 +46,6 @@ const Dashboard = () => {
 
     return (
         <div>
-            {/*Bad practice, need to create context for auth*/}
-            <Navigation 
-                authenticated={authenticated}
-                setAuthenticated={setAuthenticated}
-            />
             <h1>Dashboard</h1>
             {userSavedPosts ?  userSavedPosts.map(i => {
                return (
