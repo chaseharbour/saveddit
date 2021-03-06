@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 const Dashboard = () => {
-
+    
     const [userSavedPosts, setUSerSavedPosts] = useState([]);
     const [nextPageQuery, setNextPageQuery] = useState(1);
+    const [dataLoading, setDataLoading] = useState(false);
+    const [isLastPage, setIsLastPage] = useState(false);
 
     const getSavedQuery = () => {
+        setDataLoading(true);
         fetch(`http://localhost:8081/dashboard/${nextPageQuery}`, {
             method: "GET",
             credentials: "include",
@@ -16,18 +19,17 @@ const Dashboard = () => {
             }
         })
         .then(response => {
-            console.log(response);
             if (response.status === 200) return response.json();
             throw new Error("Failed to retrieve subreddits");
         })
         .then(responseJson => {
+            //Subsequent queries are sent with a unique post identifier. Complimentary back-end logic can be found at ../../../server/routes/dashboard_routes.js line 55.
             if (nextPageQuery !== 1) {
-                //Just creates more nested arrays of objects
                 setUSerSavedPosts(prevItems => [...prevItems, ...responseJson]);
             } else {
                 setUSerSavedPosts(responseJson);
             }
-
+            setDataLoading(false);
         })
         .catch(error => {
             console.error(error);
@@ -45,19 +47,17 @@ const Dashboard = () => {
     }, [userSavedPosts]);
 
     return (
-        <div>
-            <h1>Dashboard</h1>
-            {userSavedPosts ?  userSavedPosts.map(i => {
-               return (
-                    <ul>
-                        <li key={i.title}>
-                            <img src={i.imgMed}></img>
-                        </li>
-                    </ul>
-                )
-            }) : <p>No subreddits found.</p>}
-            {userSavedPosts ? <button onClick={getSavedQuery}>Load More</button> : null}
-        </div>
+        <main>
+            <h2>We found these saved images on your account:</h2>
+            <section>
+                {userSavedPosts ?  userSavedPosts.map(i => {
+                    return (
+                        <img key={i.postFullname} src={i.imgMed} alt={i.title}></img>  
+                        )
+                    }) : <p>No saved images found.</p>}
+                {userSavedPosts && !dataLoading ? <button onClick={getSavedQuery}>Load More</button> : <p>Loading...</p>}
+            </section>
+        </main>
     )
 }
 

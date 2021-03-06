@@ -1,18 +1,29 @@
-import React, { useEffect, useState, createContext } from 'react'
-import { Redirect } from 'react-router-dom';
-import Dashbaord from './Dashbaord';
-import Navigation from './Navigation';
-import axios from 'axios';
+import React, { useContext } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthContext';
 
-const ProtectedRoute = ({ component, authenticated }) => {
-    const Component = component;
-    console.log(component);
+ 
 
-    return authenticated ? (    
-        <Component />
-    ) : (
-        <Redirect to={{ pathname: '/login'}} />
-    );
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+    const { isAuth, isLoading } = useContext(AuthContext);
+   
+    return (
+    <Route {...rest} render={() => 
+        isAuth ? (
+            <Component />
+            ) : isLoading ? (
+                <> Loading... </>
+            ) : (
+            <Redirect to='/login' /> 
+            )
+    } />
+
+    // return authenticated ? (    
+    //     <Component />
+    // ) : (
+    //     <Redirect to={{ pathname: '/login'}} />
+    // );
+)
 }
 
 export default ProtectedRoute

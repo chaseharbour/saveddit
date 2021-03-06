@@ -1,7 +1,7 @@
 const dotenv = require('../../client/node_modules/dotenv').config();
 const router = require('express').Router();
 const snoowrap = require('snoowrap');
-const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
+const CLIENT_HOME_PAGE_URL = "http://localhost:3000/";
 
 const userServices = require('../db/services/user');
 
