@@ -49,10 +49,10 @@ const Dashboard = () => {
     return (
         <main>
             <h2>We found these saved images on your account:</h2>
-            <section>
+            <section className="image-container">
                 {userSavedPosts ?  userSavedPosts.map(i => {
                     return (
-                        <img key={i.postFullname} src={i.imgMed} alt={i.title}></img>  
+                        <img className="image-container_item img-med" key={i.postFullname} src={i.imgMed} alt={i.title}></img>  
                         )
                     }) : <p>No saved images found.</p>}
                 {userSavedPosts && !dataLoading ? <button onClick={getSavedQuery}>Load More</button> : <p>Loading...</p>}

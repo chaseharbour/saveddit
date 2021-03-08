@@ -1,7 +1,12 @@
 @import "../abstracts/variables";
 
 .nav-btn {
-  background: $sass-white;
+  background: $sass-gray-blue;
+  color: white;
   padding: 0.2rem 0.4rem;
   border-radius: 9%;
+  &:hover {
+    background: $sass-light-gray;
+    color: $sass-gray-blue;
+  }
 }
