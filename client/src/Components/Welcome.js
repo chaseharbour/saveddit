@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import { AuthContext } from '../Contexts/AuthContext';
-import Dashboard from './Dashbaord';
+import Dashboard from './Dashboard';
 
 
 const Welcome = (props) => {

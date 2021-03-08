@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AppRouter from './Components/AppRouter';
+import './main.scss';
 
 
 function App() {

@@ -17,17 +17,17 @@ const Navigation = () => {
     }
     
     return (
-        <nav>
-            <ul>
-                <li>
+        <nav className="navbar">
+            <ul className="navbar-list">
+                {/* <li className="home nav-btn navbar-list_item">
                     <Link to="/">Home</Link>
-                </li>
+                </li> */}
                 {isAuth ? (
                     <>
-                        <li onClick={handleLogoutClick}>Logout</li>
+                        <li className="login nav-btn navbar-list_item" onClick={handleLogoutClick}>Logout</li>
                     </>
                 ) : (
-                    <li onClick={handleLoginClick}>Login</li>
+                    <li className="logout nav-btn navbar-list_item" onClick={handleLoginClick}>Login</li>
                 )}
             </ul>
         </nav>

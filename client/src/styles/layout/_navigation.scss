@@ -1,0 +1,16 @@
+@import "../abstracts/variables";
+
+.navbar {
+  background: $sass-gray-blue;
+  display: grid;
+  justify-items: right;
+}
+
+.navbar-list {
+  display: grid;
+  list-style: none;
+  margin-right: 1.2rem;
+  grid-template-columns: 1fr;
+  grid-gap: 1.2rem;
+  justify-items: center;
+}
