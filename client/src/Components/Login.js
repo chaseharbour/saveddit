@@ -3,10 +3,10 @@ import React from 'react';
 const Login = (props) => {
     return (
         <React.Fragment>
-            <section id='login'>
-                <h2>Log In</h2>
-                <p>Click the link to sign in through Reddit.</p>
-                <a href='http://localhost:8081/auth/reddit'>Send me to Reddit!</a>
+            <section className='login'>
+                <h2 className='login-header'>Log In</h2>
+                <p className='login-description'>Click the link to sign in through Reddit.</p>
+                <a className='high-contrast-btn login-link' href='http://localhost:8081/auth/reddit'>Login</a>
             </section>
         </React.Fragment>
     )

@@ -1,0 +1,37 @@
+@import "../abstracts/variables";
+
+.welcome {
+  display: grid;
+  justify-content: center;
+  padding-bottom: 2rem;
+  height: 100%;
+  width: 100%;
+  background: $sass-gray-contrast;
+  &::after {
+    content: "";
+    background: $sass-gray-contrast;
+    height: 25rem;
+    transform: skewY(8deg);
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+}
+
+.welcome-header_text {
+  font-family: $sass-header-font;
+  font-size: 2.4em;
+  color: black;
+  margin: 1rem 0 0 2.5rem;
+  padding: 0;
+}
+
+.welcome-description_text {
+  font-family: $sass-text-font;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: $sass-graphite;
+  margin: 0 2rem 0 2.5rem;
+  padding: 0;
+}

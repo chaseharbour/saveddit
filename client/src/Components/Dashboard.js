@@ -1,11 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../Contexts/AuthContext';
+import Modal from './Modal';
+import Loading from './Loading';
 
 const Dashboard = () => {
-    
+    const [userSelectedImg, setUserSelectedImg] = useState(null);
+    const [modalActive, setModalActive] = useState(false);
     const [userSavedPosts, setUSerSavedPosts] = useState([]);
     const [nextPageQuery, setNextPageQuery] = useState(1);
     const [dataLoading, setDataLoading] = useState(false);
     const [isLastPage, setIsLastPage] = useState(false);
+
+    const { userName } = useContext(AuthContext);
+
+    const imgClickEvent = (e) => {
+        const clickedImgObj = userSavedPosts.find(el => el.title === e.target.alt);
+        const clickedImgFullSizeSrc = clickedImgObj.imgFull;
+        const clickedImgAlt = clickedImgObj.title;
+
+        setUserSelectedImg({src: clickedImgFullSizeSrc, alt: clickedImgAlt});
+        setModalActive(true);
+    }
 
     const getSavedQuery = () => {
         setDataLoading(true);
@@ -47,16 +62,21 @@ const Dashboard = () => {
     }, [userSavedPosts]);
 
     return (
-        <main>
-            <h2>We found these saved images on your account:</h2>
+        <main className="dashboard-container">
+            <aside className='dashboard-header'>
+                <h2 className='dashboard-header_text'>Showing saved content for u/{userName}</h2>
+            </aside>
+            
             <section className="image-container">
                 {userSavedPosts ?  userSavedPosts.map(i => {
                     return (
-                        <img className="image-container_item img-med" key={i.postFullname} src={i.imgMed} alt={i.title}></img>  
+                        <img className="image-container_item img-med" onClick={imgClickEvent} key={i.postFullname} src={i.imgMed} alt={i.title}></img>  
                         )
                     }) : <p>No saved images found.</p>}
-                {userSavedPosts && !dataLoading ? <button onClick={getSavedQuery}>Load More</button> : <p>Loading...</p>}
+                
             </section>
+            {userSavedPosts && !dataLoading ? <button className="btn" onClick={getSavedQuery}><p>Load More</p></button> : <Loading />}
+            {userSelectedImg && modalActive ? <Modal currImageSrc={userSelectedImg.src} currImageAlt={userSelectedImg.alt} setModalActive={setModalActive}/> : null}
         </main>
     )
 }

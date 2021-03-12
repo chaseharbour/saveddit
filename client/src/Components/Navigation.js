@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext';
 
 const Navigation = () => {
@@ -24,10 +23,10 @@ const Navigation = () => {
                 </li> */}
                 {isAuth ? (
                     <>
-                        <li className="login nav-btn navbar-list_item" onClick={handleLogoutClick}>Logout</li>
+                        <li className="high-contrast-btn navbar-list_item" onClick={handleLogoutClick}>Logout</li>
                     </>
                 ) : (
-                    <li className="logout nav-btn navbar-list_item" onClick={handleLoginClick}>Login</li>
+                    <li className="high-contrast-btn navbar-list_item" onClick={handleLoginClick}>Login</li>
                 )}
             </ul>
         </nav>

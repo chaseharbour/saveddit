@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Welcome from './Welcome';
+import Welcome from './Home';
 import Dashboard from './Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
