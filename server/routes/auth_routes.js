@@ -90,7 +90,7 @@ router.get('/reddit', (req, res) => {
       clientId: CLIENT_ID,
       scope: ['identity', 'read', 'mysubreddits', 'history'],
       //Change to false. Will last an hour.
-      permanent: true,
+      permanent: false,
       redirectUri: 'http://localhost:8081/auth/reddit/callback',
       state: 'teststring'
     })
