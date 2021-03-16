@@ -1,28 +1,24 @@
 const path = require('path');
 const dotenv = require('dotenv').config();
 const express = require('express');
-const session =  require('express-session')
+const session =  require('express-session');
+const redis = require('redis');
+const redisClient = redis.createClient({
+  host: 'redis-server',
+  port: 6379
+});
+const RedisStore = require('connect-redis')(session);
 const app = express();
 const cors = require('cors');
-const SessionStore = require('express-session-sequelize')(session.Store);
 
-const db =  require('./db/models/database');
-const Users = require('./db/models/Users');
+const ONE_HOUR = 1000 * 60 * 60 * 1;
 
-const sequelizeSessionStore = new SessionStore({
-  db,
-});
-
-const FOUR_HOURS = 1000 * 60 * 60 * 1;
-
-//TODO: Create database structure for posts
-
-
+//Environment variables
 const {
   SERVER_PORT = 8081,
   CLIENT_PORT = 3000,
   NODE_ENV = 'development',
-  SESS_LIFETIME = FOUR_HOURS,
+  SESS_LIFETIME = ONE_HOUR,
   SESS_NAME = 'sid',
   SESS_SECRET = 'somesupersecretstring'
 } = process.env;
@@ -32,10 +28,13 @@ const IN_PROD = NODE_ENV === 'production'
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+//Redis error handling
+redisClient.on('error', (err) => console.log(`Redis error: ${err}`));
+
 //Create session object with cookie
 app.use(session({
   name: SESS_NAME,
-  store: sequelizeSessionStore,
+  store: new RedisStore({ client: redisClient }),
   resave: false,
   saveUninitialized: false,
   secret: SESS_SECRET,
@@ -59,8 +58,6 @@ app.use('/dashboard', require('./routes/dashboard_routes'));
 
 
 //Get welcome page with login
-//Instantiate token
-
 const authCheck = (req, res, next) => {
   if (!req.session.userName) {
     res.status(401).json({
@@ -71,9 +68,6 @@ const authCheck = (req, res, next) => {
     next();
   }
 }
-
-//Testing retrieval from DB
-app.get('/users', Users.readAll);
 
 app.get('/', authCheck, (req, res) => {
   res.status(200).json({

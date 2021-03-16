@@ -1,57 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import Navigation from './Navigation';
-import Post from './Post';
+import React from 'react';
+import Login from './Login';
+
 
 //TODO: Create routing 
 //Fetch data from backend
 
 const Welcome = (props) => {
-    const [user, setUser] = useState([]);
-    const [authError, setAuthError] = useState(null);
-    const [authenticated, setAuthenticated] = useState(false);
-
-     useEffect(() => {
-         
-         fetch("http://localhost:8081/auth/login/success", {
-             method: "GET",
-             credentials: "include",
-             headers: {
-                 Accept: "application/json",
-                 "Content-type": "application/json",
-                 "Access-Control-Allow-Credentials": true
-             }
-         }).then(response => {
-             console.log(response);
-             if (response.status === 200) return response.json();
-             throw new Error("Failed to authenticate user");
-         })
-         .then(responseJson => {
-             setAuthenticated(true);
-             setUser(responseJson.user);
-         })
-         .catch(error => {
-             setAuthenticated(false);
-             setAuthError('Failed to authenticate user');
-             console.error(error);
-         })
-     }, [])
-
-
+    
     return (
-        <div>
-            <Navigation 
-                authenticated={authenticated}
-                setAuthenticated={setAuthenticated}
-            />
-            {!authenticated ? (
-                <h1>Welcome!</h1>
-            ) : (
-                <div>
-                    <h1>You have logged in successfully!</h1>
-                    <h2>Welcome {user}</h2>
-                </div>
-            )}
-        </div>
+        <React.Fragment>
+        <header className="welcome">
+            <h1 className='welcome-header_text'>Welcome!</h1>
+            <p className='welcome-description_text'>This app uses the Reddit API to quickly consolidate and display all images saved to your account. To begin using this app, log in through Reddit below. Don't worry, we wont have access to your Reddit password.</p>
+        </header>
+        <Login />
+        </React.Fragment>
     )
 }
 

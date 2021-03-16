@@ -1,0 +1,44 @@
+@import "../abstracts/variables";
+
+.high-contrast-btn {
+  background: $sass-dark-salmon;
+  font-family: $sass-subhead-font;
+  color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 9%;
+  transition: all 0.2s;
+  cursor: pointer;
+  &:hover {
+    background: $sass-light-gray;
+    color: $sass-dark-salmon;
+  }
+}
+
+.btn {
+  background: $sass-graphite;
+  font-family: $sass-subhead-font;
+  color: white;
+  padding: 1rem 0.6rem;
+  border-radius: 5%;
+  border: none;
+  &:hover {
+    background: $sass-light-gray;
+    color: $sass-graphite;
+  }
+  p {
+    line-height: 0;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+  }
+}
+
+.exit-btn {
+  background: rgba(255, 255, 255, 0);
+  color: $sass-light-gray;
+  border: none;
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(1.6);
+  }
+}

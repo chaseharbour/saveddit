@@ -1,10 +1,7 @@
-const dotenv = require('../../client/node_modules/dotenv').config();
+const dotenv = require('dotenv').config();
 const router = require('express').Router();
 const snoowrap = require('snoowrap');
 const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
-
-const userServices = require('../db/services/user');
-
 
 const {
   CLIENT_ID,
@@ -25,10 +22,7 @@ const authCheck = (req, res, next) => {
 }
 
 
-router.get('/:getFrom', authCheck, (req, res) => {
-
-  console.log(req.session);
-  
+router.get('/:getFrom', authCheck, (req, res) => {  
   if (req.session.userName) {
     const { token } = req.session; 
     const { getFrom } = req.params;
@@ -38,14 +32,7 @@ router.get('/:getFrom', authCheck, (req, res) => {
       accessToken: token,
     })
 
-    //Gets urls from saved posts
-    //TODO:
-    //Get different image sizes
-    //Only get image urls
-    //Get post title
-    //How to handle albums???
-
-    //Query and pagination working! Maybe a more elegant way to get subsequent data.
+    //Gets urls from saved posts on reddit account
     async function getSavedPosts() {
       try{
         let urls;
@@ -75,6 +62,7 @@ router.get('/:getFrom', authCheck, (req, res) => {
               }
             }
           })
+          //Filters through saved posts that were returned as 'undefined'
           urlsCleaned = urls.filter(Boolean);
           res.json(urlsCleaned);
       }

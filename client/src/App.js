@@ -1,9 +1,19 @@
-import React from 'react';
-import AppRouter from './Components/AppRouter';
+import React, { useState, useEffect } from 'react';
+import Home from './Components/Home';
+import Navigation from './Components/Navigation';
+
 
 function App() {
+    // const [authenticated, setAuthenticated] = useState(false);
+    // const [user, setUser] = useState(null);
+
+    
+
     return (
-        <AppRouter />
+        <React.Fragment>
+            <Navigation />
+            <Home />
+        </React.Fragment>
     )
 }
 

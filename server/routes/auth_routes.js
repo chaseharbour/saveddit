@@ -1,9 +1,9 @@
-const dotenv = require('../../client/node_modules/dotenv').config();
+const dotenv = require('dotenv').config();
 const router = require('express').Router();
 const snoowrap = require('snoowrap');
-const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
+const CLIENT_HOME_PAGE_URL = "http://localhost:3000/";
 
-const userServices = require('../db/services/user');
+//const userServices = require('../db/services/user');
 
 
 const {
@@ -71,8 +71,9 @@ router.get('/reddit/callback', (req, res, next) => {
         //getMe method gets user object from snoowrap
         //Set currentUser to reddit username
         const currentUser = a.name;
+
         //Offloads to ../db/services/user; seaches db for currentUser; returns user object from db if found, creates new user if not found.
-        userServices.findOrCreate(currentUser, accessToken);
+        //userServices.findOrCreate(currentUser, accessToken);
         //Redirects to client home.
         req.session.userName = currentUser;
         res.redirect(CLIENT_HOME_PAGE_URL);
@@ -87,9 +88,9 @@ router.get('/reddit', (req, res) => {
     //If user chooses "Allow" then they are redirected to redirectUri
     let authenticationUrl = snoowrap.getAuthUrl({
       clientId: CLIENT_ID,
-      scope: ['identity', 'submit', 'read', 'vote', 'mysubreddits', 'history'],
+      scope: ['identity', 'read', 'mysubreddits', 'history'],
       //Change to false. Will last an hour.
-      permanent: true,
+      permanent: false,
       redirectUri: 'http://localhost:8081/auth/reddit/callback',
       state: 'teststring'
     })

@@ -1,15 +1,20 @@
-import React from 'react';
-import Welcome from './Welcome';
-import Dashboard from './Dashbaord';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import Welcome from './Home';
+import Dashboard from './Dashboard';
+import ProtectedRoute from './ProtectedRoute';
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Navigation from './Navigation';
+import Login from './Login';
 
 const AppRouter = () => {
     return (
         <Router>
-            <div>
-                <Route exact path ="/" component={Welcome} />
-                <Route exact path ="/dashboard" component={Dashboard} />
-            </div>
+            <Navigation />           
+            <Switch>
+                <ProtectedRoute path="/dashboard" component={Dashboard} />
+                <Route exact path="/" component={Welcome} />
+                <Route exact path="/login" component={Login} />
+            </Switch>
         </Router>
     )
 }

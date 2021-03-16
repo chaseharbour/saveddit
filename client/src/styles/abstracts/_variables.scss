@@ -1,0 +1,28 @@
+//Colors
+$sass-light-gray: rgba(249, 247, 246);
+$sass-white: rgba(247, 250, 250);
+$sass-gray-blue: rgba(137, 173, 171);
+$sass-taupe: rgba(173, 161, 154);
+
+$sass-dark-salmon: #dd614a;
+$sass-graphite: #2b303a;
+$sass-blue: rgba(0, 177, 204, 1);
+$sass-gray-contrast: rgba(199, 199, 209, 1);
+$sass-red-high-contrast: rgba(254, 32, 32, 1);
+//Font imports
+@font-face {
+  font-family: "Hind";
+  src: local("Hind"), url(../../fonts/Hind-Bold.ttf);
+}
+@font-face {
+  font-family: "Chivo";
+  src: local("Chivo"), url(../../fonts/Chivo-Regular.ttf);
+}
+@font-face {
+  font-family: "Hind Vadodara";
+  src: local("Hind"), url(../../fonts/HindVadodara-Regular.ttf);
+}
+//Fonts
+$sass-header-font: "Hind";
+$sass-subhead-font: "Chivo";
+$sass-text-font: "Hind Vadodara";

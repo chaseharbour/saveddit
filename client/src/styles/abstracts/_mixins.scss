@@ -1,0 +1,33 @@
+@import "../abstracts/variables";
+
+//ANIMATIONS
+@mixin transform($transforms...) {
+  $transform-list: join($transforms, null, space);
+  transform: $transform-list;
+}
+
+@mixin keyframe($animation-name) {
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($delay, $duration, $iterations, $animation) {
+  animation-delay: $delay;
+  animation-duration: $duration;
+  animation-iteration-count: $iterations;
+  animation-name: $animation;
+}
+
+//MEDIA QUERIES
+@mixin tablet-screens {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop-screens {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}

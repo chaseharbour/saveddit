@@ -1,0 +1,8 @@
+@import "../abstracts/variables";
+
+body {
+  background: $sass-light-gray;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
