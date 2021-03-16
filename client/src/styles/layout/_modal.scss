@@ -20,6 +20,9 @@
     height: auto;
     border-radius: 0.2%;
     color: white;
+    @include desktop-screens {
+      max-width: 65%;
+    }
   }
 }
 

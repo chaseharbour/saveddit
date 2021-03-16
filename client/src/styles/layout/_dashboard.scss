@@ -24,6 +24,7 @@
 .dashboard-header {
   display: grid;
   justify-content: center;
+  justify-items: center;
   margin-top: 0;
   margin-left: 0;
   padding-top: 1rem;
@@ -32,7 +33,7 @@
   &::after {
     content: "";
     background: $sass-blue;
-    height: 15rem;
+    height: 17rem;
     transform: skewY(-8deg);
     position: absolute;
     left: 0;
@@ -42,10 +43,11 @@
 }
 
 .dashboard-header_text {
+  width: 80%;
   font-family: $sass-header-font;
+  text-align: center;
   font-size: 2rem;
   color: white;
-  margin-left: 2rem;
 }
 
 .dashboard-container {
