@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import AuthProvider from './Contexts/AuthContext';
-import './main.scss';
-
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import AuthProvider from "./Contexts/AuthContext";
+import "./main.scss";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,7 +10,7 @@ ReactDOM.render(
       <App />
     </AuthProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
