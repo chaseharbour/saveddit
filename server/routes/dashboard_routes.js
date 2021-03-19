@@ -50,7 +50,8 @@ router.get("/:getFrom", authCheck, (req, res) => {
             item.url &&
             !item.is_video &&
             item.preview &&
-            item.post_hint === "image"
+            item.post_hint === "image" &&
+            item.preview.images[0].resolutions[1].url
           ) {
             return {
               title: item.title,
@@ -62,6 +63,9 @@ router.get("/:getFrom", authCheck, (req, res) => {
               isVideo: item.is_video,
               nsfw: item.over_18,
               imgFull: item.url,
+              allResolutions: item.preview.images[0].resolutions.map(
+                (e) => e.url
+              ),
               imgSmall: item.preview
                 ? item.preview.images[0].resolutions[0].url
                 : null,
@@ -72,6 +76,7 @@ router.get("/:getFrom", authCheck, (req, res) => {
           }
         });
         //Filters through saved posts that were returned as 'undefined'
+        console.log(urls);
         urlsCleaned = urls.filter(Boolean);
         res.json(urlsCleaned);
       } catch (error) {

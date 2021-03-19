@@ -21,13 +21,13 @@
 
 //MEDIA QUERIES
 @mixin tablet-screens {
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
     @content;
   }
 }
 
 @mixin desktop-screens {
-  @media (max-width: 1200px) {
+  @media (min-width: 1200px) {
     @content;
   }
 }
