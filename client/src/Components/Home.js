@@ -13,7 +13,7 @@ const Home = (props) => {
   } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:8081/auth/login/success", {
+    fetch("http://165.232.156.48:8081/auth/login/success", {
       method: "GET",
       credentials: "include",
       headers: {

@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   const getSavedQuery = () => {
     setDataLoading(true);
-    fetch(`http://localhost:8081/dashboard/${nextPageQuery}`, {
+    fetch(`http://165.232.156.48:8081/dashboard/${nextPageQuery}`, {
       method: "GET",
       credentials: "include",
       headers: {

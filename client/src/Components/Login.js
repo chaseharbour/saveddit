@@ -10,7 +10,7 @@ const Login = (props) => {
         </p>
         <a
           className="high-contrast-btn login-link"
-          href="http://localhost:8081/auth/reddit"
+          href="http://165.232.156.48:8081/auth/reddit"
         >
           Login
         </a>

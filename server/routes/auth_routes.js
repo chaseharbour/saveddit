@@ -3,6 +3,7 @@ const router = require("express").Router();
 const snoowrap = require("snoowrap");
 
 const {
+  USER_AGENT,
   REDIRECT_URI,
   CLIENT_HOST_ADDRESS = "localhost",
   CLIENT_PORT,
@@ -50,7 +51,7 @@ router.get("/reddit/callback", (req, res, next) => {
   snoowrap
     .fromAuthCode({
       code: requestToken,
-      userAgent: "scheddit",
+      userAgent: USER_AGENT,
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       redirectUri: REDIRECT_URI,

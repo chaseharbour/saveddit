@@ -1,9 +1,7 @@
 const dotenv = require("dotenv").config();
 const router = require("express").Router();
 const snoowrap = require("snoowrap");
-const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
-
-const { CLIENT_ID, CLIENT_SECRET, REDDIT_USER, REDDIT_PASSWORD } = process.env;
+const { USER_AGENT } = process.env;
 
 const authCheck = (req, res, next) => {
   if (!req.session.userName) {
@@ -22,7 +20,7 @@ router.get("/:getFrom", authCheck, (req, res) => {
     const { getFrom } = req.params;
 
     const r = new snoowrap({
-      userAgent: "scheddit",
+      userAgent: USER_AGENT,
       accessToken: token,
     });
 
