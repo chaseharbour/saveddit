@@ -1,14 +1,6 @@
 const dotenv = require("dotenv").config();
 const router = require("express").Router();
 const snoowrap = require("snoowrap");
-<<<<<<< HEAD
-const CLIENT_HOME_PAGE_URL = "http://localhost:3000/";
-
-//const userServices = require('../db/services/user');
-
-const { CLIENT_ID, CLIENT_SECRET, REDDIT_USER, REDDIT_PASSWORD } = process.env;
-
-=======
 
 const {
   REDIRECT_URI,
@@ -22,7 +14,6 @@ const {
 
 const CLIENT_HOME_PAGE = `http://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}/`;
 
->>>>>>> development
 router.get("/login/success", (req, res) => {
   if (req.session.userName) {
     res.json({
@@ -62,11 +53,7 @@ router.get("/reddit/callback", (req, res, next) => {
       userAgent: "scheddit",
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
-<<<<<<< HEAD
-      redirectUri: "http://localhost:8081/auth/reddit/callback",
-=======
       redirectUri: REDIRECT_URI,
->>>>>>> development
     })
     .then((response) => {
       const refreshToken = response.refreshToken;
@@ -102,11 +89,7 @@ router.get("/reddit", (req, res) => {
     scope: ["identity", "read", "mysubreddits", "history"],
     //Change to false. Will last an hour.
     permanent: false,
-<<<<<<< HEAD
-    redirectUri: "http://localhost:8081/auth/reddit/callback",
-=======
     redirectUri: REDIRECT_URI,
->>>>>>> development
     state: "teststring",
   });
 

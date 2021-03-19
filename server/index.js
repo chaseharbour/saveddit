@@ -80,13 +80,10 @@ app.get("/", authCheck, (req, res) => {
     cookies: req.cookies,
   });
 });
-<<<<<<< HEAD
-=======
 
 app.get("/ping", (req, res) => {
   res.send("PONG");
 });
->>>>>>> development
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server listening on port ${SERVER_PORT}`);
