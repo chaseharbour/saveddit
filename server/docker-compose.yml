@@ -1,8 +1,52 @@
-version: "3"
+version: "3.8"
+networks:
+  internal:
+
 services:
-  redis-server:
-    image: "redis"
-  node-app:
-    build: .
+  web:
+    build:
+      context: .
+      args:
+        - NODE_ENV=production
+        - SERVER_PORT=${SERVER_PORT}
+        - CLIENT_PORT=${CLIENT_PORT}
+        - SERVER_HOST_ADDRESS=${SERVER_HOST_ADDRESS}
+        - CLIENT_HOST_ADDRESS=${CLIENT_HOST_ADDRESS}
+        - CLIENT_ID=${CLIENT_ID}
+        - CLIENT_SECRET=${CLIENT_SECRET}
+        - SESS_SECRET=${SESS_SECRET}
+    container_name: saveddit-server
+
+    networks:
+      - internal
     ports:
-      - "8081:8081"
+      - "8081:${SERVER_PORT}"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: always
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://${SERVER_HOST_ADDRESS}:${SERVER_PORT}/ping",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+  db:
+    image: redis:latest
+    container_name: redis-server
+    networks:
+      - internal
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 3
+      start_period: 1s
