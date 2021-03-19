@@ -13,7 +13,7 @@ const {
   REDDIT_PASSWORD,
 } = process.env;
 
-const CLIENT_HOME_PAGE = `http://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}/`;
+const CLIENT_HOME_PAGE = `https://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}/`;
 
 router.get("/login/success", (req, res) => {
   if (req.session.userName) {

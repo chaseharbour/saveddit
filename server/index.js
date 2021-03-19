@@ -15,6 +15,7 @@ const ONE_HOUR = 1000 * 60 * 60 * 1;
 
 //Environment variables
 const {
+  CLIENT_HOST_ADDRESS = "localhost",
   SERVER_PORT = 8081,
   CLIENT_PORT = 3000,
   NODE_ENV = "development",
@@ -50,7 +51,7 @@ app.use(
 //SETUP CORS
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: `https://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}`,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
