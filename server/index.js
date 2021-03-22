@@ -11,6 +11,7 @@ const app = express();
 const cors = require("cors");
 
 const ONE_HOUR = 1000 * 60 * 60 * 1;
+console.log(redisClient);
 
 //Environment variables
 const {
