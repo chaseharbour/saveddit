@@ -26,15 +26,18 @@ const Dashboard = () => {
 
   const getSavedQuery = () => {
     setDataLoading(true);
-    fetch(`http://165.232.156.48:8081/dashboard/${nextPageQuery}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-    })
+    fetch(
+      `https://aqueous-hollows-02149.herokuapp.com/dashboard/${nextPageQuery}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      }
+    )
       .then((response) => {
         if (response.status === 200) return response.json();
         throw new Error("Failed to retrieve subreddits");

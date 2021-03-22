@@ -50,7 +50,7 @@ app.use(
 //SETUP CORS
 app.use(
   cors({
-    origin: `https://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}`,
+    origin: CLIENT_HOST_ADDRESS,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })

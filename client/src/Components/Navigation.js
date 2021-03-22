@@ -5,12 +5,18 @@ const Navigation = () => {
   const { isAuth, setAuthData, setLoadingState } = useContext(AuthContext);
 
   const handleLogoutClick = () => {
-    window.open("http://165.232.156.48:8081/auth/logout", "_self");
+    window.open(
+      "https://aqueous-hollows-02149.herokuapp.com/auth/logout",
+      "_self"
+    );
     setAuthData(false);
   };
 
   const handleLoginClick = () => {
-    window.open("http://165.232.156.48:8081/auth/reddit", "_self");
+    window.open(
+      "https://aqueous-hollows-02149.herokuapp.com/auth/reddit",
+      "_self"
+    );
     setLoadingState(true);
   };
 

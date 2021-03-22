@@ -40,7 +40,7 @@ router.get("/logout", (req, res) => {
       return console.log(err);
     }
 
-    res.redirect(CLIENT_HOME_PAGE);
+    res.redirect(CLIENT_HOST_ADDRESS);
   });
 });
 
@@ -76,7 +76,7 @@ router.get("/reddit/callback", (req, res, next) => {
         //userServices.findOrCreate(currentUser, accessToken);
         //Redirects to client home.
         req.session.userName = currentUser;
-        res.redirect(CLIENT_HOME_PAGE);
+        res.redirect(CLIENT_HOST_ADDRESS);
       });
     });
 });

@@ -13,7 +13,7 @@ const Home = (props) => {
   } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://165.232.156.48:8081/auth/login/success", {
+    fetch("https://aqueous-hollows-02149.herokuapp.com/auth/login/success", {
       method: "GET",
       credentials: "include",
       headers: {
