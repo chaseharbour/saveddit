@@ -15,7 +15,7 @@ const ONE_HOUR = 1000 * 60 * 60 * 1;
 //Environment variables
 const {
   CLIENT_HOST_ADDRESS = "localhost",
-  SERVER_PORT = 8081,
+  PORT = 8081,
   CLIENT_PORT = 3000,
   NODE_ENV = "development",
   SESS_LIFETIME = ONE_HOUR,
@@ -85,6 +85,6 @@ app.get("/ping", (req, res) => {
   res.send("PONG");
 });
 
-app.listen(SERVER_PORT, () => {
-  console.log(`Server listening on port ${SERVER_PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
