@@ -52,7 +52,7 @@ app.use(
 app.use(
   cors({
     origin: `${CLIENT_HOST_ADDRESS}`,
-    allowedHeaders: ["Content-Type", "Accept", "Origin"],
+    allowedHeaders: ["Content-Type", "Accept", "Origin", "Credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
