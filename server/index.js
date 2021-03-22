@@ -51,7 +51,7 @@ app.use(
 //SETUP CORS
 app.use(
   cors({
-    origin: CLIENT_HOST_ADDRESS,
+    origin: `${CLIENT_HOST_ADDRESS}`,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
