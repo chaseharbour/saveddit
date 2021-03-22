@@ -17,6 +17,8 @@ services:
     container_name: saveddit-server
     env_file:
       - .env
+    ports:
+      - "8081:${SERVER_PORT}"
     depends_on:
       - db
     restart: unless-stopped
@@ -68,10 +70,6 @@ volumes:
   certbot-var:
   web-root:
     driver: local
-    driver_opts:
-      type: none
-      device: /home/sammy/node_project/views/
-      o: bind
 
 networks:
   app-network:

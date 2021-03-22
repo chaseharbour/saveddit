@@ -4,8 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const redis = require("redis");
 const redisClient = redis.createClient({
-  host: "redis-server",
-  port: 6379,
+  url: process.env.REDIS_URL,
 });
 const RedisStore = require("connect-redis")(session);
 const app = express();
