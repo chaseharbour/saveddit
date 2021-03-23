@@ -54,7 +54,7 @@ app.use(
     origin: `${CLIENT_HOST_ADDRESS}`,
     credentials: true,
     allowedHeaders: ["Content-Type", "Credentials"],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
   })
 );
