@@ -52,7 +52,6 @@ app.use(
 app.use(
   cors({
     origin: `${CLIENT_HOST_ADDRESS}`,
-    credentials: true,
     allowedHeaders: ["Content-Type", "Credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
