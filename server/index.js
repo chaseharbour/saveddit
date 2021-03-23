@@ -53,10 +53,13 @@ app.use(
   cors({
     origin: `${CLIENT_HOST_ADDRESS}`,
     credentials: true,
-    allowedHeaders: ["Content-Type", "credentials"],
+    allowedHeaders: ["Content-Type", "Credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
   })
 );
+
+app.options("*", cors());
 
 //ROUTES
 app.use("/auth", require("./routes/auth_routes"));
