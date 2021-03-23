@@ -1,6 +1,7 @@
 const dotenv = require("dotenv").config();
 const router = require("express").Router();
 const snoowrap = require("snoowrap");
+const cors = require("cors");
 const { USER_AGENT } = process.env;
 
 const authCheck = (req, res, next) => {
@@ -13,6 +14,8 @@ const authCheck = (req, res, next) => {
     next();
   }
 };
+
+router.all("*", cors({ credentials: true }));
 
 router.get("/:getFrom", authCheck, (req, res) => {
   if (req.session.userName) {

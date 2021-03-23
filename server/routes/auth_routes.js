@@ -1,6 +1,7 @@
 const dotenv = require("dotenv").config();
 const router = require("express").Router();
 const snoowrap = require("snoowrap");
+const cors = require("cors");
 
 const {
   USER_AGENT,
@@ -14,6 +15,8 @@ const {
 } = process.env;
 
 const CLIENT_HOME_PAGE = `https://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}/`;
+
+router.all("*", cors({ credentials: true }));
 
 router.get("/login/success", (req, res) => {
   if (req.session.userName) {
