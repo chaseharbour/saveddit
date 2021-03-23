@@ -42,7 +42,7 @@ app.use(
     secret: SESS_SECRET,
     cookie: {
       maxAge: SESS_LIFETIME,
-      sameSite: true,
+      sameSite: false,
       secure: IN_PROD,
     },
   })
@@ -53,7 +53,7 @@ app.use(
   cors({
     origin: `${CLIENT_HOST_ADDRESS}`,
     credentials: true,
-    allowedHeaders: ["Content-Type"],
+    allowedHeaders: ["Content-Type", "credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
