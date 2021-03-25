@@ -42,7 +42,7 @@ app.use(
     secret: SESS_SECRET,
     cookie: {
       maxAge: SESS_LIFETIME,
-      sameSite: false,
+      sameSite: "none",
       secure: IN_PROD,
     },
   })
