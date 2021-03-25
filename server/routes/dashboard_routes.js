@@ -43,12 +43,12 @@ router.get("/:getFrom", authCheck, (req, res) => {
       try {
         let urls;
         let urlsCleaned;
-        let queryOptions = { t: "all", limit: 10, type: "links" };
+        let queryOptions = { t: "all", limit: 80, type: "links" };
 
         if (getFrom !== 1) {
           queryOptions = {
             t: "all",
-            limit: 10,
+            limit: 80,
             type: "links",
             after: `${getFrom}`,
           };
