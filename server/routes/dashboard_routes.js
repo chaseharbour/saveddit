@@ -2,7 +2,7 @@ const dotenv = require("dotenv").config();
 const router = require("express").Router();
 const snoowrap = require("snoowrap");
 const cors = require("cors");
-const { USER_AGENT } = process.env;
+const { USER_AGENT, CLIENT_HOST_ADDRESS } = process.env;
 
 const authCheck = (req, res, next) => {
   if (!req.session.userName) {
@@ -15,7 +15,15 @@ const authCheck = (req, res, next) => {
   }
 };
 
-router.all("*", cors({ credentials: true }));
+router.use(
+  cors({
+    origin: `${CLIENT_HOST_ADDRESS}`,
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Credentials"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    preflightContinue: false,
+  })
+);
 
 router.get("/:getFrom", authCheck, (req, res) => {
   if (req.session.userName) {

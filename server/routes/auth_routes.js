@@ -16,7 +16,15 @@ const {
 
 const CLIENT_HOME_PAGE = `https://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}/`;
 
-router.all("*", cors({ credentials: true }));
+router.use(
+  cors({
+    origin: `${CLIENT_HOST_ADDRESS}`,
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Credentials"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    preflightContinue: false,
+  })
+);
 
 router.get("/login/success", (req, res) => {
   if (req.session.userName) {
