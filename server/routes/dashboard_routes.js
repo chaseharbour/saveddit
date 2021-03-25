@@ -26,6 +26,9 @@ router.use(
 );
 
 router.get("/:getFrom", authCheck, (req, res) => {
+  console.log(req.session);
+  console.log(req.session.userName);
+  console.log(req.session.token);
   if (req.session.userName) {
     const { token } = req.session;
     const { getFrom } = req.params;
