@@ -32,6 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 //Redis error handling
 redisClient.on("error", (err) => console.log(`Redis error: ${err}`));
 
+app.set("trust proxy", 1);
+
 //Create session object with cookie
 app.use(
   session({
