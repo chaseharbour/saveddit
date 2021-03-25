@@ -14,12 +14,11 @@ const Home = (props) => {
 
   useEffect(() => {
     fetch("https://aqueous-hollows-02149.herokuapp.com/auth/login/success", {
+      mode: "cors",
       method: "GET",
       credentials: "include",
       headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-        "Access-Control-Allow-Credentials": true,
+        "Content-Type": "application/json",
       },
     })
       .then((response) => {
