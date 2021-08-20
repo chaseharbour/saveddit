@@ -7,7 +7,7 @@ services:
     build:
       context: .
       args:
-        - NODE_ENV=production
+        - NODE_ENV=devlopment
         - SERVER_PORT=${SERVER_PORT}
         - CLIENT_PORT=${CLIENT_PORT}
         - SERVER_HOST_ADDRESS=${SERVER_HOST_ADDRESS}

@@ -27,7 +27,8 @@ const Dashboard = () => {
   const getSavedQuery = () => {
     setDataLoading(true);
     fetch(
-      `https://aqueous-hollows-02149.herokuapp.com/dashboard/${nextPageQuery}`,
+      // `https://aqueous-hollows-02149.herokuapp.com/dashboard/${nextPageQuery}`,
+      `http://localhost:8081/dashboard/${nextPageQuery}`,
       {
         mode: "cors",
         method: "GET",
@@ -70,9 +71,9 @@ const Dashboard = () => {
   return (
     <main className="dashboard-container">
       <aside className="dashboard-header">
-        <h2 className="dashboard-header_text">
-          Showing saved content for u/{userName}
-        </h2>
+        <h1 className="dashboard-header_text">
+          Showing saved content for <span className="contrast-text">u/{userName}</span>
+        </h1>
       </aside>
 
       <section className="image-container">

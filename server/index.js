@@ -24,7 +24,7 @@ const {
   SESS_SECRET = "somesupersecretstring",
 } = process.env;
 
-const IN_PROD = NODE_ENV === "production";
+const IN_PROD = NODE_ENV === "development";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

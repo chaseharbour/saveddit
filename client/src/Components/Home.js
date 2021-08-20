@@ -13,7 +13,8 @@ const Home = (props) => {
   } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("https://aqueous-hollows-02149.herokuapp.com/auth/login/success", {
+    // fetch("https://aqueous-hollows-02149.herokuapp.com/auth/login/success", {
+    fetch("http://localhost:8081/auth/login/success", {
       mode: "cors",
       method: "GET",
       credentials: "include",

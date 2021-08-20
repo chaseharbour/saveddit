@@ -4,8 +4,11 @@ $sass-white: rgba(247, 250, 250);
 $sass-gray-blue: rgba(137, 173, 171);
 $sass-taupe: rgba(173, 161, 154);
 
-$sass-dark-salmon: #dd614a;
+$sass-dark-salmon: 	hsl(9, 68%, 58%);
+$contrast-orange: 	hsl(9, 68%, 58%);
 $sass-graphite: #2b303a;
+$bg-dark-gray: 	hsl(220, 15%, 20%);
+$bg-white: 	hsl(38, 40%, 96%);
 $sass-blue: rgba(0, 177, 204, 1);
 $sass-gray-contrast: rgba(199, 199, 209, 1);
 $sass-red-high-contrast: rgba(254, 32, 32, 1);
@@ -26,3 +29,9 @@ $sass-red-high-contrast: rgba(254, 32, 32, 1);
 $sass-header-font: "Hind";
 $sass-subhead-font: "Chivo";
 $sass-text-font: "Hind Vadodara";
+
+//Text colors
+$text-base-white: 	$bg-white;
+$text-header-white: hsl(38, 40%, 96%);
+$text-base-black: hsl(218, 15%, 32%);
+$text-header-black: $bg-dark-gray;

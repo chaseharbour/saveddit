@@ -4,13 +4,10 @@ const Login = (props) => {
   return (
     <React.Fragment>
       <section className="login">
-        <h2 className="login-header">Log In</h2>
-        <p className="login-description">
-          Click the link to sign in through Reddit.
-        </p>
         <a
           className="high-contrast-btn login-link"
-          href="https://aqueous-hollows-02149.herokuapp.com/auth/reddit"
+          href="http://localhost:8081/auth/reddit"
+          // href="https://aqueous-hollows-02149.herokuapp.com/auth/reddit"
         >
           Login
         </a>

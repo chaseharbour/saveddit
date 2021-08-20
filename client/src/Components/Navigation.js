@@ -28,20 +28,16 @@ const Navigation = () => {
                 </li> */}
         {isAuth ? (
           <>
+          <h1 className="navbar-title">Saveddit</h1>
             <li
-              className="high-contrast-btn navbar-list_item"
+              className="high-contrast-btn-sm navbar-list_item"
               onClick={handleLogoutClick}
             >
-              Logout
+              Sign out
             </li>
           </>
         ) : (
-          <li
-            className="high-contrast-btn navbar-list_item"
-            onClick={handleLoginClick}
-          >
-            Login
-          </li>
+          <h1 className="navbar-title">Saveddit</h1>
         )}
       </ul>
     </nav>

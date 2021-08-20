@@ -1,17 +1,26 @@
 @import "../abstracts/variables";
+@import "../abstracts/mixins";
 
 .high-contrast-btn {
-  background: $sass-dark-salmon;
-  font-family: $sass-subhead-font;
-  color: white;
-  padding: 0.2rem 0.4rem;
-  border-radius: 9%;
-  transition: all 0.2s;
-  cursor: pointer;
-  &:hover {
-    background: $sass-light-gray;
-    color: $sass-dark-salmon;
-  }
+  @include link-btn($padding: 0.75rem 2.5rem) {
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+  };
+}
+
+.high-contrast-btn-sm {
+  @include link-btn($padding: 0.25rem 0.75rem) {
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.7em;
+    max-height: 1.5rem;
+  };
 }
 
 .btn {
