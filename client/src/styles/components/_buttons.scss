@@ -8,7 +8,7 @@
     text-decoration: none;
     font-weight: bold;
     font-size: 1.2em;
-  };
+  }
 }
 
 .high-contrast-btn-sm {
@@ -20,7 +20,7 @@
     font-weight: bold;
     font-size: 0.7em;
     max-height: 1.5rem;
-  };
+  }
 }
 
 .btn {
@@ -30,9 +30,11 @@
   padding: 1rem 0.6rem;
   border-radius: 5%;
   border: none;
+  cursor: pointer;
   &:hover {
     background: $sass-light-gray;
     color: $sass-graphite;
+    cursor: pointer;
   }
   p {
     line-height: 0;
@@ -47,7 +49,9 @@
   color: $sass-light-gray;
   border: none;
   transition: transform 0.3s;
+  cursor: pointer;
   &:hover {
+    cursor: pointer;
     transform: scale(1.6);
   }
 }

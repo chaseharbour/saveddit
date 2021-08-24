@@ -11,7 +11,6 @@ const app = express();
 const cors = require("cors");
 
 const ONE_HOUR = 1000 * 60 * 60 * 1;
-console.log(redisClient);
 
 //Environment variables
 const {
@@ -24,7 +23,12 @@ const {
   SESS_SECRET = "somesupersecretstring",
 } = process.env;
 
-const IN_PROD = NODE_ENV === "development";
+const IN_PROD = NODE_ENV === "production";
+
+const CLIENT_HOME_PAGE =
+  NODE_ENV === "development"
+    ? `http://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}`
+    : CLIENT_HOST_ADDRESS;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 //Redis error handling
 redisClient.on("error", (err) => console.log(`Redis error: ${err}`));
 
-app.set("trust proxy", 1);
+app.set("trust proxy", true);
 
 //Create session object with cookie
 app.use(
@@ -44,7 +48,7 @@ app.use(
     secret: SESS_SECRET,
     cookie: {
       maxAge: SESS_LIFETIME,
-      sameSite: "none",
+      sameSite: IN_PROD ? "none" : false,
       secure: IN_PROD,
     },
   })
@@ -53,7 +57,8 @@ app.use(
 //SETUP CORS
 app.use(
   cors({
-    origin: `${CLIENT_HOST_ADDRESS}`,
+    // origin: `${CLIENT_HOST_ADDRESS}`,
+    origin: CLIENT_HOME_PAGE,
     credentials: true,
     allowedHeaders: ["Content-Type", "Credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
@@ -80,6 +85,8 @@ const authCheck = (req, res, next) => {
 };
 
 app.get("/", authCheck, (req, res) => {
+  console.log(`/ endpoint: ${req.session}`);
+
   res.status(200).json({
     authenticated: true,
     message: "User successfully authenticated.",

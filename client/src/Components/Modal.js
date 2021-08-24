@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ReactComponent as Close } from "../icons/close.svg";
 
 const Modal = (props) => {

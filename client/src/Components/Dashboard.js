@@ -26,18 +26,14 @@ const Dashboard = () => {
 
   const getSavedQuery = () => {
     setDataLoading(true);
-    fetch(
-      // `https://aqueous-hollows-02149.herokuapp.com/dashboard/${nextPageQuery}`,
-      `http://localhost:8081/dashboard/${nextPageQuery}`,
-      {
-        mode: "cors",
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(`${process.env.REACT_APP_DASHBOARD}/${nextPageQuery}`, {
+      mode: "cors",
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         if (response.status === 200) return response.json();
         throw new Error("Failed to retrieve subreddits");
@@ -72,7 +68,8 @@ const Dashboard = () => {
     <main className="dashboard-container">
       <aside className="dashboard-header">
         <h1 className="dashboard-header_text">
-          Showing saved content for <span className="contrast-text">u/{userName}</span>
+          Showing saved content for{" "}
+          <span className="contrast-text">u/{userName}</span>
         </h1>
       </aside>
 

@@ -2,7 +2,7 @@ const dotenv = require("dotenv").config();
 const router = require("express").Router();
 const snoowrap = require("snoowrap");
 const cors = require("cors");
-const { USER_AGENT, CLIENT_HOST_ADDRESS } = process.env;
+const { USER_AGENT, CLIENT_HOST_ADDRESS, CLIENT_PORT } = process.env;
 
 const authCheck = (req, res, next) => {
   if (!req.session.userName) {
@@ -17,7 +17,8 @@ const authCheck = (req, res, next) => {
 
 router.use(
   cors({
-    origin: `${CLIENT_HOST_ADDRESS}`,
+    // origin: `${CLIENT_HOST_ADDRESS}`,
+    origin: `http://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}`,
     credentials: true,
     allowedHeaders: ["Content-Type", "Credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
@@ -26,9 +27,6 @@ router.use(
 );
 
 router.get("/:getFrom", authCheck, (req, res) => {
-  console.log(req.session);
-  console.log(req.session.userName);
-  console.log(req.session.token);
   if (req.session.userName) {
     const { token } = req.session;
     const { getFrom } = req.params;
@@ -57,13 +55,13 @@ router.get("/:getFrom", authCheck, (req, res) => {
 
         urls = savedContent.map((item) => {
           //If post doesn't fit criteria then it's sent as 'undefined'
+
           if (
             !item.is_self &&
             item.url &&
             !item.is_video &&
             item.preview &&
-            item.post_hint === "image" &&
-            item.preview.images[0].resolutions[1].url
+            item.post_hint === "image"
           ) {
             return {
               title: item.title,
@@ -78,19 +76,17 @@ router.get("/:getFrom", authCheck, (req, res) => {
               allResolutions: item.preview.images[0].resolutions.map(
                 (e) => e.url
               ),
-              imgSmall: item.preview
-                ? item.preview.images[0].resolutions[0].url
-                : null,
-              imgMed: item.preview
-                ? item.preview.images[0].resolutions[1].url
-                : null,
+              imgSmall: item.preview?.images[0]?.resolutions[0].url,
+              imgMed:
+                item.preview?.images[0]?.resolutions[1]?.url ||
+                item.preview?.images[0].resolutions[0].url,
             };
           }
         });
         //Filters through saved posts that were returned as 'undefined'
-        console.log(urls);
-        urlsCleaned = urls.filter(Boolean);
-        res.json(urlsCleaned);
+        urlsCleaned = urls.filter((post) => post !== undefined);
+        console.log(savedContent);
+        return res.json(urlsCleaned);
       } catch (error) {
         console.error(error);
         res.status(500).send({ error });

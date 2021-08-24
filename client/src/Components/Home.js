@@ -4,17 +4,12 @@ import Dashboard from "./Dashboard";
 import Welcome from "./Welcome";
 
 const Home = (props) => {
-  const {
-    isAuth,
-    userName,
-    setAuthData,
-    setLoadingState,
-    setUserData,
-  } = useContext(AuthContext);
+  const { isAuth, setAuthData, setLoadingState, setUserData } =
+    useContext(AuthContext);
 
   useEffect(() => {
     // fetch("https://aqueous-hollows-02149.herokuapp.com/auth/login/success", {
-    fetch("http://localhost:8081/auth/login/success", {
+    fetch(process.env.REACT_APP_AUTH, {
       mode: "cors",
       method: "GET",
       credentials: "include",

@@ -10,15 +10,20 @@ const {
   CLIENT_PORT,
   CLIENT_ID,
   CLIENT_SECRET,
+  NODE_ENV,
   REDDIT_USER,
   REDDIT_PASSWORD,
 } = process.env;
 
-const CLIENT_HOME_PAGE = `https://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}/`;
+const CLIENT_HOME_PAGE =
+  NODE_ENV === "development"
+    ? `http://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}`
+    : CLIENT_HOST_ADDRESS;
 
 router.use(
   cors({
-    origin: `${CLIENT_HOST_ADDRESS}`,
+    // origin: `${CLIENT_HOST_ADDRESS}`,
+    origin: CLIENT_HOME_PAGE,
     credentials: true,
     allowedHeaders: ["Content-Type", "Credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
@@ -27,8 +32,9 @@ router.use(
 );
 
 router.get("/login/success", (req, res) => {
+  console.log(`/login/success endpoint: ${req.session}`);
   if (req.session.userName) {
-    res.json({
+    return res.json({
       success: true,
       message: "User has successfully authenticated",
       user: req.session.userName,
@@ -51,12 +57,13 @@ router.get("/logout", (req, res) => {
       return console.log(err);
     }
 
-    res.redirect(CLIENT_HOST_ADDRESS);
+    return res.redirect(CLIENT_HOME_PAGE);
   });
 });
 
 //Authorize with access token
 router.get("/reddit/callback", (req, res, next) => {
+  console.log(`/reddit/callback endpoint: ${req.session}`);
   const requestToken = req.query.code;
 
   snoowrap
@@ -70,14 +77,7 @@ router.get("/reddit/callback", (req, res, next) => {
     .then((response) => {
       const refreshToken = response.refreshToken;
       const accessToken = response.access_token;
-      console.log(refreshToken);
       req.session.token = accessToken;
-      req.session.refresh = refreshToken;
-      //CURRENT TODO:
-      //Save sessionID to DB.
-      //Session pesistence.
-      //Send user info to client.
-      //Display logged in on client side.
       response.getMe().then((a) => {
         //getMe method gets user object from snoowrap
         //Set currentUser to reddit username
@@ -86,8 +86,10 @@ router.get("/reddit/callback", (req, res, next) => {
         //Offloads to ../db/services/user; seaches db for currentUser; returns user object from db if found, creates new user if not found.
         //userServices.findOrCreate(currentUser, accessToken);
         //Redirects to client home.
+        // res.redirect(CLIENT_HOST_ADDRESS);
         req.session.userName = currentUser;
-        res.redirect(CLIENT_HOST_ADDRESS);
+        console.log(req.session);
+        return res.redirect(CLIENT_HOME_PAGE);
       });
     });
 });
@@ -105,7 +107,7 @@ router.get("/reddit", (req, res) => {
     state: "teststring",
   });
 
-  res.redirect(authenticationUrl);
+  return res.redirect(authenticationUrl);
 });
 
 module.exports = router;

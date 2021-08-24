@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
 
 const Navigation = () => {
@@ -12,14 +12,6 @@ const Navigation = () => {
     setAuthData(false);
   };
 
-  const handleLoginClick = () => {
-    window.open(
-      "https://aqueous-hollows-02149.herokuapp.com/auth/reddit",
-      "_self"
-    );
-    setLoadingState(true);
-  };
-
   return (
     <nav className="navbar">
       <ul className="navbar-list">
@@ -28,7 +20,7 @@ const Navigation = () => {
                 </li> */}
         {isAuth ? (
           <>
-          <h1 className="navbar-title">Saveddit</h1>
+            <h1 className="navbar-title">Saveddit</h1>
             <li
               className="high-contrast-btn-sm navbar-list_item"
               onClick={handleLogoutClick}
