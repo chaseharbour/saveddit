@@ -36,6 +36,8 @@ router.get("/:getFrom", authCheck, (req, res) => {
       accessToken: token,
     });
 
+    r.config({ requestDelay: 1000 });
+
     //Gets urls from saved posts on reddit account
     async function getSavedPosts() {
       try {
@@ -85,7 +87,6 @@ router.get("/:getFrom", authCheck, (req, res) => {
         });
         //Filters through saved posts that were returned as 'undefined'
         urlsCleaned = urls.filter((post) => post !== undefined);
-        console.log(savedContent);
         return res.json(urlsCleaned);
       } catch (error) {
         console.error(error);
