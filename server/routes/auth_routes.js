@@ -23,7 +23,7 @@ const CLIENT_HOME_PAGE =
 router.use(
   cors({
     // origin: `${CLIENT_HOST_ADDRESS}`,
-    origin: CLIENT_HOME_PAGE,
+    origin: `${CLIENT_HOME_PAGE}`,
     credentials: true,
     allowedHeaders: ["Content-Type", "Credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
