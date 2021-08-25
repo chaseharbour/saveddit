@@ -8,13 +8,10 @@ const Modal = (props) => {
     setModalActive(false);
   };
   return (
-    <div className="modal-background">
+    <div className="modal-background" onClick={deactivateModal}>
       <div className="image-modal">
         <img src={currImageSrc} alt={currImageAlt} />
       </div>
-      <button className="image-modal_close exit-btn" onClick={deactivateModal}>
-        <Close />
-      </button>
     </div>
   );
 };
