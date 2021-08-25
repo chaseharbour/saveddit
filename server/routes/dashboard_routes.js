@@ -2,7 +2,7 @@ const dotenv = require("dotenv").config();
 const router = require("express").Router();
 const snoowrap = require("snoowrap");
 const cors = require("cors");
-const { USER_AGENT, CLIENT_HOST_ADDRESS, CLIENT_PORT } = process.env;
+const { USER_AGENT, CLIENT_HOST_ADDRESS, CLIENT_PORT, NODE_ENV } = process.env;
 
 const CLIENT_HOME_PAGE =
   NODE_ENV === "development"
