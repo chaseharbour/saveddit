@@ -4,6 +4,11 @@ const snoowrap = require("snoowrap");
 const cors = require("cors");
 const { USER_AGENT, CLIENT_HOST_ADDRESS, CLIENT_PORT } = process.env;
 
+const CLIENT_HOME_PAGE =
+  NODE_ENV === "development"
+    ? `http://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}`
+    : CLIENT_HOST_ADDRESS;
+
 const authCheck = (req, res, next) => {
   if (!req.session.userName) {
     res.status(401).json({
@@ -18,7 +23,7 @@ const authCheck = (req, res, next) => {
 router.use(
   cors({
     // origin: `${CLIENT_HOST_ADDRESS}`,
-    origin: `http://${CLIENT_HOST_ADDRESS}:${CLIENT_PORT}`,
+    origin: CLIENT_HOME_PAGE,
     credentials: true,
     allowedHeaders: ["Content-Type", "Credentials"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
