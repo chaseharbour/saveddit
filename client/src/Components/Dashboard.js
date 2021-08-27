@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
-import Modal from "./Modal";
-import Loading from "./Loading";
+import Media from "./Media";
 
 const Dashboard = () => {
   const [userSelectedImg, setUserSelectedImg] = useState(null);
@@ -19,8 +18,17 @@ const Dashboard = () => {
     );
     const clickedImgFullSizeSrc = clickedImgObj.imgFull;
     const clickedImgAlt = clickedImgObj.title;
+    const clickedMediaPostHint = clickedImgObj.postHint;
+    const mediaEmbed = clickedImgObj.mediaEmbed;
+    const mediaDomain = clickedImgObj.domain;
 
-    setUserSelectedImg({ src: clickedImgFullSizeSrc, alt: clickedImgAlt });
+    setUserSelectedImg({
+      src: clickedImgFullSizeSrc,
+      alt: clickedImgAlt,
+      postHint: clickedMediaPostHint,
+      mediaEmbed,
+      mediaDomain,
+    });
     setModalActive(true);
   };
 
@@ -65,46 +73,18 @@ const Dashboard = () => {
   }, [userSavedPosts]);
 
   return (
-    <main className="dashboard-container">
-      <aside className="dashboard-header">
-        <h1 className="dashboard-header_text">
-          Showing saved content for{" "}
-          <span className="contrast-text">u/{userName}</span>
-        </h1>
-      </aside>
-
-      <section className="image-container">
-        {userSavedPosts ? (
-          userSavedPosts.map((i) => {
-            return (
-              <img
-                className="image-container_item img-med"
-                onClick={imgClickEvent}
-                key={i.postFullname}
-                src={i.imgMed}
-                alt={i.title}
-              ></img>
-            );
-          })
-        ) : (
-          <p>No saved images found.</p>
-        )}
-      </section>
-      {userSavedPosts && !dataLoading ? (
-        <button className="btn" onClick={getSavedQuery}>
-          <p>Load More</p>
-        </button>
-      ) : (
-        <Loading />
-      )}
-      {userSelectedImg && modalActive ? (
-        <Modal
-          currImageSrc={userSelectedImg.src}
-          currImageAlt={userSelectedImg.alt}
-          setModalActive={setModalActive}
-        />
-      ) : null}
-    </main>
+    <>
+      <Media
+        userName={userName}
+        userSavedPosts={userSavedPosts}
+        dataLoading={dataLoading}
+        getSavedQuery={getSavedQuery}
+        userSelectedImg={userSelectedImg}
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+        imgClickEvent={imgClickEvent}
+      />
+    </>
   );
 };
 

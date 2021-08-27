@@ -1,19 +1,22 @@
 import React from "react";
-import { ReactComponent as Close } from "../icons/close.svg";
+import Image from "./Image";
 
-const Modal = (props) => {
-  const { currImageSrc, currImageAlt, setModalActive } = props;
-
+const ImageModal = ({
+  currImageSrc,
+  currImageAlt,
+  currImageKey,
+  setModalActive,
+}) => {
   const deactivateModal = () => {
     setModalActive(false);
   };
   return (
     <div className="modal-background" onClick={deactivateModal}>
       <div className="image-modal">
-        <img src={currImageSrc} alt={currImageAlt} />
+        <Image imgSrc={currImageSrc} imgAlt={currImageAlt} />
       </div>
     </div>
   );
 };
 
-export default Modal;
+export default ImageModal;

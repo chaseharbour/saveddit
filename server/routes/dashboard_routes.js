@@ -84,10 +84,10 @@ router.get("/:getFrom", authCheck, (req, res) => {
               allResolutions: item.preview.images[0].resolutions.map(
                 (e) => e.url
               ),
-              imgSmall: item.preview?.images[0]?.resolutions[0].url,
+              imgSmall: item.preview?.images[0]?.resolutions[0]?.url,
               imgMed:
                 item.preview?.images[0]?.resolutions[1]?.url ||
-                item.preview?.images[0].resolutions[0].url,
+                item.preview?.images[0]?.resolutions[0]?.url,
               vidPreview: item.preview?.reddit_video_preview?.fallback_url,
               vidUrl: item.url_overridden_by_dest,
             };
