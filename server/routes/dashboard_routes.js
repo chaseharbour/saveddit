@@ -70,9 +70,12 @@ router.get("/:getFrom", authCheck, (req, res) => {
         urls = savedContent.map((item) => {
           //If post doesn't fit criteria then it's sent as 'undefined'
 
+          // console.log(item);
           if (!item.is_self && item.url && item.preview) {
             return {
               title: item.title,
+              subreddit: item.subreddit_name_prefixed,
+              author: item.author.name,
               postHint: item.post_hint,
               domain: item.domain,
               mediaEmbed: item.media_embed?.content,
@@ -94,7 +97,7 @@ router.get("/:getFrom", authCheck, (req, res) => {
           }
         });
         //Filters through saved posts that were returned as 'undefined'
-        console.log(urls);
+        // console.log(urls);
         urlsCleaned = urls.filter((post) => post !== undefined);
         return res.json(urlsCleaned);
       } catch (error) {

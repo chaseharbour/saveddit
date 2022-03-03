@@ -1,22 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.42b8fa36.chunk.css",
-    "main.js": "/static/js/main.d148ae4f.chunk.js",
-    "main.js.map": "/static/js/main.d148ae4f.chunk.js.map",
+    "main.css": "/static/css/main.4d95412c.chunk.css",
+    "main.js": "/static/js/main.c269d0bb.chunk.js",
+    "main.js.map": "/static/js/main.c269d0bb.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.a593ec1b.js",
     "runtime-main.js.map": "/static/js/runtime-main.a593ec1b.js.map",
     "static/js/2.a02b3ef5.chunk.js": "/static/js/2.a02b3ef5.chunk.js",
     "static/js/2.a02b3ef5.chunk.js.map": "/static/js/2.a02b3ef5.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.42b8fa36.chunk.css.map": "/static/css/main.42b8fa36.chunk.css.map",
+    "static/css/main.4d95412c.chunk.css.map": "/static/css/main.4d95412c.chunk.css.map",
     "static/js/2.a02b3ef5.chunk.js.LICENSE.txt": "/static/js/2.a02b3ef5.chunk.js.LICENSE.txt",
-    "static/media/main.scss": "/static/media/HindVadodara-Regular.e2d50be0.ttf",
-    "static/media/close.94dd49a8.svg": "/static/media/close.94dd49a8.svg"
+    "static/media/main.scss": "/static/media/HindVadodara-Regular.e2d50be0.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.a593ec1b.js",
     "static/js/2.a02b3ef5.chunk.js",
-    "static/css/main.42b8fa36.chunk.css",
-    "static/js/main.d148ae4f.chunk.js"
+    "static/css/main.4d95412c.chunk.css",
+    "static/js/main.c269d0bb.chunk.js"
   ]
 }

@@ -5,7 +5,7 @@
   "scripts": {
     "create-dev-tables": "babel-node ./db/dev/dbConnection createAllTables",
     "start": "node index",
-    "dev": "nodemon index",
+    "dev": "nodemon -L index.js",
     "setup": "npm-run-all -p start create-dev-tables"
   },
   "keywords": [],

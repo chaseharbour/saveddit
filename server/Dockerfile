@@ -37,4 +37,4 @@ COPY ./ ./
 EXPOSE $PORT
 
 #Default command
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]

@@ -16,7 +16,8 @@ services:
         - CLIENT_SECRET=${CLIENT_SECRET}
         - SESS_SECRET=${SESS_SECRET}
     container_name: saveddit-server
-
+    volumes:
+      - ./:/usr/app
     networks:
       - internal
     ports:

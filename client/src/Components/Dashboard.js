@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
 import Media from "./Media";
+import Filter from "./Filter";
 
 const Dashboard = () => {
   const [userSelectedImg, setUserSelectedImg] = useState(null);
@@ -34,6 +35,7 @@ const Dashboard = () => {
 
   const getSavedQuery = () => {
     setDataLoading(true);
+    console.log(`${process.env.REACT_APP_DASHBOARD}`);
     fetch(`${process.env.REACT_APP_DASHBOARD}/${nextPageQuery}`, {
       mode: "cors",
       method: "GET",
@@ -74,6 +76,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <Filter userSavedPosts={userSavedPosts} />
       <Media
         userName={userName}
         userSavedPosts={userSavedPosts}
