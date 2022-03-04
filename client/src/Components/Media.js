@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ImageModal from "./ImageModal";
 import Loading from "./Loading";
 import Image from "./Image";
@@ -15,6 +15,8 @@ const Media = ({
   setModalActive,
   imgClickEvent,
 }) => {
+  const [renderedMedia, setRenderedMedia] = useState([]);
+
   let modal;
   console.log(userSelectedImg);
 
@@ -53,6 +55,10 @@ const Media = ({
   } else {
     modal = null;
   }
+
+  useEffect(() => {
+    setRenderedMedia(userSavedPosts);
+  }, [userSavedPosts]);
 
   return (
     <main className="dashboard-container">

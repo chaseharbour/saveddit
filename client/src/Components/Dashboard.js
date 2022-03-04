@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [userSelectedImg, setUserSelectedImg] = useState(null);
   const [modalActive, setModalActive] = useState(false);
   const [userSavedPosts, setUSerSavedPosts] = useState([]);
+  const [currentRenderedPosts, setCurrentRenderedPosts] = useState([]);
   const [nextPageQuery, setNextPageQuery] = useState(1);
   const [dataLoading, setDataLoading] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
@@ -76,10 +77,15 @@ const Dashboard = () => {
 
   return (
     <>
-      <Filter userSavedPosts={userSavedPosts} />
+      <Filter
+        userSavedPosts={userSavedPosts}
+        filterFunc={setCurrentRenderedPosts}
+      />
       <Media
         userName={userName}
-        userSavedPosts={userSavedPosts}
+        userSavedPosts={
+          currentRenderedPosts ? currentRenderedPosts : userSavedPosts
+        }
         dataLoading={dataLoading}
         getSavedQuery={getSavedQuery}
         userSelectedImg={userSelectedImg}
