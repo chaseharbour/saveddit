@@ -4,69 +4,72 @@ const Filter = ({ userSavedPosts, filterFunc }) => {
   const [allSubreddits, setAllSubreddits] = useState([]);
   const [checkedSubs, setCheckedSubs] = useState([]);
   const [uncheckedSubs, setUncheckedSubs] = useState([]);
+  const [selected, setSelected] = useState([]);
+  const [unselected, setUnselected] = useState([]);
 
   useEffect(() => {
     const subs = userSavedPosts.map((post) => post.subreddit);
 
-    const filteredSubs = subs.filter((item, i) => subs.indexOf(item) === i);
-    //   .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+    const filteredSubs = subs
+      .filter((item, i) => subs.indexOf(item) === i)
+      .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 
     setAllSubreddits(filteredSubs);
   }, [userSavedPosts]);
 
   //Updates state in the Dashboard component
   useEffect(() => {
-    filterFunc(handleFilterSubs(userSavedPosts, checkedSubs));
-  }, [checkedSubs, userSavedPosts]);
+    filterFunc(handleFilterSubs(userSavedPosts, selected));
+  }, [selected, userSavedPosts]);
 
   const handleFilterSubs = (array, target) =>
     array.filter((item, i) => target.includes(item.subreddit));
 
-  const handleCheckboxOnChange = (e) => {
-    setCheckedSubs({ ...checkedSubs, [e.target.id]: e.target.checked });
-  };
-
-  const handleCheckboxClicked = (e) => {
-    if (e.target.checked) {
-      setCheckedSubs([...checkedSubs, e.target.id]);
-      setUncheckedSubs(allSubreddits.filter((item) => item !== e.target.id));
-    } else {
-      setCheckedSubs(() =>
-        checkedSubs.filter((item, i, arr) => item !== e.target.id)
-      );
-      setUncheckedSubs(() =>
-        allSubreddits.filter((item) => !checkedSubs.includes(item))
-      );
+  const handleCheckboxOnChange = (item) => {
+    if (selected.includes(item)) {
+      const selectedCopy = [...selected];
+      //   const unselectedCopy = [...unselected];
+      selectedCopy.splice(selected.indexOf(item), 1);
+      //   unselectedCopy.push(item);
+      //   setUnselected(unselectedCopy);
+      return setSelected(selectedCopy);
     }
+
+    const selectedCopy = [...selected];
+    // const unselectedCopy = [...allSubreddits];
+    selectedCopy.push(item);
+    // unselectedCopy.splice(unselected.indexOf(item, 1));
+    // setUnselected(unselectedCopy);
+    return setSelected(selectedCopy);
   };
 
   return (
     <form>
       <fieldset>
         <legend>Subreddit:</legend>
-        {checkedSubs.length >= 1 && uncheckedSubs.length >= 1 ? (
+        {selected.length >= 1 ? (
           <>
             <ul>
-              {checkedSubs.map((sub) => (
+              {selected.map((sub) => (
                 <li>
                   <input
                     type="checkbox"
                     id={sub}
-                    onChange={handleCheckboxClicked}
-                    checked={checkedSubs.includes(sub) ? true : false}
+                    onChange={() => handleCheckboxOnChange(sub)}
+                    checked={selected.includes(sub) ? true : false}
                   ></input>
                   <label htmlFor={sub}>{sub}</label>
                 </li>
               ))}
             </ul>
             <ul>
-              {uncheckedSubs.map((sub) => (
+              {allSubreddits.map((sub) => (
                 <li>
                   <input
                     type="checkbox"
                     id={sub}
-                    onChange={handleCheckboxClicked}
-                    checked={checkedSubs.includes(sub) ? true : false}
+                    onChange={() => handleCheckboxOnChange(sub)}
+                    checked={selected.includes(sub) ? true : false}
                   ></input>
                   <label htmlFor={sub}>{sub}</label>
                 </li>
@@ -80,7 +83,7 @@ const Filter = ({ userSavedPosts, filterFunc }) => {
                 <input
                   type="checkbox"
                   id={sub}
-                  onChange={handleCheckboxClicked}
+                  onChange={() => handleCheckboxOnChange(sub)}
                 ></input>
                 <label htmlFor={sub}>{sub}</label>
               </li>
