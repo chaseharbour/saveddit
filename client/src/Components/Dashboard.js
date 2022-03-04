@@ -84,7 +84,9 @@ const Dashboard = () => {
       <Media
         userName={userName}
         userSavedPosts={
-          currentRenderedPosts ? currentRenderedPosts : userSavedPosts
+          currentRenderedPosts.length >= 1
+            ? currentRenderedPosts
+            : userSavedPosts
         }
         dataLoading={dataLoading}
         getSavedQuery={getSavedQuery}

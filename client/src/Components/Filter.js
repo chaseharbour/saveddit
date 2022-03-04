@@ -44,48 +44,68 @@ const Filter = ({ userSavedPosts, filterFunc }) => {
   };
 
   return (
-    <form>
-      <fieldset>
-        <legend>Subreddit:</legend>
+    <form className="form-container">
+      <fieldset className="subreddit-fieldset">
+        <legend className="subreddit-fieldset_legend">
+          Filter by subreddit:
+        </legend>
         {selected.length >= 1 ? (
           <>
-            <ul>
+            <ul className="subreddit-fieldset_list-selected">
               {selected.map((sub) => (
-                <li>
+                <li className="subreddit-fieldset_selected anim-bg">
                   <input
+                    className="subreddit-fieldset_checkbox"
                     type="checkbox"
                     id={sub}
                     onChange={() => handleCheckboxOnChange(sub)}
                     checked={selected.includes(sub) ? true : false}
                   ></input>
-                  <label htmlFor={sub}>{sub}</label>
+                  <label
+                    className="subreddit-fieldset_checkbox-label"
+                    htmlFor={sub}
+                  >
+                    {sub}
+                  </label>
                 </li>
               ))}
             </ul>
-            <ul>
+            <ul className="subreddit-fieldset_list">
               {allSubreddits.map((sub) => (
-                <li>
+                <li className="subreddit-fieldset_all">
                   <input
+                    className="subreddit-fieldset_checkbox"
                     type="checkbox"
                     id={sub}
                     onChange={() => handleCheckboxOnChange(sub)}
                     checked={selected.includes(sub) ? true : false}
                   ></input>
-                  <label htmlFor={sub}>{sub}</label>
+                  <label
+                    className="subreddit-fieldset_checkbox-label"
+                    htmlFor={sub}
+                  >
+                    {sub}
+                  </label>
                 </li>
               ))}
             </ul>{" "}
           </>
         ) : (
-          <ul>
+          <ul className="subreddit-fieldset_list">
             {allSubreddits.map((sub) => (
-              <li>
+              <li className="subreddit-fieldset_all">
                 <input
+                  className="subreddit-fieldset_checkbox"
                   type="checkbox"
                   id={sub}
                   onChange={() => handleCheckboxOnChange(sub)}
                 ></input>
-                <label htmlFor={sub}>{sub}</label>
+                <label
+                  className="subreddit-fieldset_checkbox-label"
+                  htmlFor={sub}
+                >
+                  {sub}
+                </label>
               </li>
             ))}
           </ul>

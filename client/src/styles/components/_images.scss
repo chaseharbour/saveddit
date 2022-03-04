@@ -4,8 +4,11 @@
   width: 250px;
   height: 250px;
   object-fit: cover;
+  transition: transform 0.2s;
 
   &:hover {
     cursor: pointer;
+    transform: scale(103%);
+    transition: transform 0.2s;
   }
 }

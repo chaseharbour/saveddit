@@ -1,0 +1,79 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+@import "../components/contrast";
+
+.form-container {
+  font-family: $sass-text-font;
+  color: $sass-graphite;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  margin: 2rem;
+  max-height: 10rem;
+  //   max-width: max-content;
+  overflow-y: scroll;
+  padding: 0;
+  scrollbar-width: 0.7rem;
+  scrollbar-color: $bg-white $sass-graphite;
+
+  &::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: $bg-white;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 1rem;
+    background-color: $sass-graphite;
+  }
+}
+
+.subreddit-fieldset_legend {
+  font-family: $sass-subhead-font;
+  font-size: 1.3em;
+  letter-spacing: 0.01em;
+}
+
+.subreddit-fieldset {
+  padding: 0.5rem;
+  margin: 0;
+  border: none;
+}
+
+.subreddit-fieldset_list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.subreddit-fieldset_list-selected {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1.5rem;
+  list-style: none;
+}
+
+.subreddit-fieldset_selected {
+  line-height: 2rem;
+  height: 2rem;
+  //   margin-top: 0.1rem;
+  margin: 0;
+  margin-top: 0.2rem;
+}
+
+.anim-bg {
+  background-color: $contrast-orange;
+  transition: background-color 1s;
+}
+
+.subreddit-fieldset_all {
+  line-height: 2rem;
+  height: 2rem;
+  //   margin-top: 0.1rem;
+  margin: 0;
+  margin-top: 0.2rem;
+  background-color: $sass-gray-contrast;
+
+  &:nth-child(2n) {
+    color: $text-base-white;
+    background-color: $text-base-black;
+  }
+}
